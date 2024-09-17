@@ -12,8 +12,3 @@ TEST(ReverseStringTest, HandlesSingleCharacter) {
 TEST(ReverseStringTest, HandlesMultipleCharacters) {
     EXPECT_EQ(reverseString("hello"), "olleh");
 }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
