@@ -5,4 +5,4 @@
 
 std::string reverseString(const std::string& str);
 
-#endif // REVERSE_STRING_H
+#endif

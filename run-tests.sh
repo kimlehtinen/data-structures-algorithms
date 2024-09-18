@@ -3,5 +3,5 @@
 cmake -S . -B build
 cmake --build build
 cd build
-ctest
+ctest --output-on-failure
 cd ..
