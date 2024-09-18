@@ -27,7 +27,6 @@ add_executable(myapp ${SRC_FILES})
 install(TARGETS myapp DESTINATION bin)
 
 # Specify the include directories for your project (for both `myapp` and `run_tests`)
-# This will allow the tests to include headers from the src/ folder.
 target_include_directories(myapp PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 # Enable testing
@@ -45,5 +44,7 @@ target_include_directories(run_tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
 # Link GoogleTest to the test executable
 target_link_libraries(run_tests gtest gtest_main)
 
-# Register the test with CTest
-add_test(NAME run_tests COMMAND run_tests)
+# Discover and register all GoogleTest tests with CTest
+include(GoogleTest)
+gtest_discover_tests(run_tests)
+
