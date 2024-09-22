@@ -16,8 +16,10 @@ void second(int n) {
     }
 }
 
+/*
 int main() {
     first(20);
 
     return 0;
 }
+*/

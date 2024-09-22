@@ -17,8 +17,14 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Automatically find all source files in src/ and tests/
-file(GLOB_RECURSE SRC_FILES "src/*.cpp")
-file(GLOB_RECURSE TEST_FILES "tests/*.cpp")
+file(GLOB_RECURSE SRC_FILES "${CMAKE_SOURCE_DIR}/src/**/*.cpp")
+list(APPEND SRC_FILES "${CMAKE_SOURCE_DIR}/src/main.cpp")
+
+
+file(GLOB_RECURSE TEST_FILES "tests/**/*.cpp")
+
+# Debugging: Print the source files
+message("Source files: ${SRC_FILES}")
 
 # Add the executable for the main application
 add_executable(myapp ${SRC_FILES})

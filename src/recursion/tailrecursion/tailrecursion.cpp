@@ -8,9 +8,11 @@ void tailRecursion(int n) {
     }
 }
 
+/*
 int main() {
     int x = 5;
     tailRecursion(x);
 
     return 0;
 }
+*/
