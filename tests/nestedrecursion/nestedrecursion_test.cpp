@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "recursion/nestedrecursion/nestedrecursion.h"
+#include "nestedrecursion/nestedrecursion.h"
 
 TEST(NestedRecursionTest, BelowThreshold) {
     EXPECT_EQ(91, nestedRecursion(0));
