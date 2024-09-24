@@ -6,6 +6,7 @@ Writing in quite C-style C++ just for educational purposes, not meant to be late
 Course: https://www.udemy.com/course/datastructurescncpp 
 
 ## Run tests
+Tests are written using [GoogleTest](https://github.com/google/googletest). The following script will both build the project and run the tests.
 ```
 ./run_tests.sh
 ```
