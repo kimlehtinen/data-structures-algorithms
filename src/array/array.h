@@ -11,9 +11,15 @@ struct Array {
 };
 
 // Function declarations
-void Display(const Array& arr);
 void Append(Array* arr, int x);
-void Insert(Array* arr, int index, int x);
+float Average(const Array& arr);
 void Delete(Array* arr, int index);
+void Display(const Array& arr);
+int Get(const Array& arr, int index);
+void Insert(Array* arr, int index, int x);
+int Max(const Array& arr);
+int Min(const Array& arr);
+void Set(Array* arr, int index, int x);
+int Sum(const Array& arr);
 
 #endif // ARRAY_H

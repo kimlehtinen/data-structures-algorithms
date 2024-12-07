@@ -1,5 +1,8 @@
 #include "array/array.h"
 
+/**
+ * Time complexity: Best case O(1), Average case O(log n), Worst case O(log n)
+ */
 int BinarySearch(const Array& arr, int key) {
     int low, high, mid;
     low = 0;
