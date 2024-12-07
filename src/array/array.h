@@ -17,8 +17,11 @@ void Delete(Array* arr, int index);
 void Display(const Array& arr);
 int Get(const Array& arr, int index);
 void Insert(Array* arr, int index, int x);
+bool IsSorted(const Array& arr);
 int Max(const Array& arr);
 int Min(const Array& arr);
+void Rearrange(Array* arr);
+void Reverse(Array* arr);
 void Set(Array* arr, int index, int x);
 int Sum(const Array& arr);
 

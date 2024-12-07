@@ -46,6 +46,15 @@ void Insert(Array *arr, int index, int x) {
     }
 }
 
+bool IsSorted(const Array& arr) {
+    for (int i = 0; i < arr.length - 1; i++) {
+        if (arr.data[i] > arr.data[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int Max(const Array& arr) {
     int max = arr.data[0];
     for (int i = 1; i < arr.length; i++) {
@@ -64,6 +73,28 @@ int Min(const Array& arr) {
         }
     }
     return min;
+}
+
+void Rearrange(Array *arr) {
+    int i = 0;
+    int j = arr->length - 1;
+    while (i < j) {
+        while (arr->data[i] < 0) i++;
+        while (arr->data[j] >= 0) j--;
+        if (i < j) {
+            int temp = arr->data[i];
+            arr->data[i] = arr->data[j];
+            arr->data[j] = temp;
+        }
+    }
+}
+
+void Reverse(Array *arr) {  
+    for (int i = 0, j = arr->length - 1; i < j; i++, j--) {
+        int temp = arr->data[i];
+        arr->data[i] = arr->data[j];
+        arr->data[j] = temp;
+    }
 }
 
 void Set(Array *arr, int index, int x) {
