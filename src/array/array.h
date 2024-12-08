@@ -19,6 +19,7 @@ int Get(const Array& arr, int index);
 void Insert(Array* arr, int index, int x);
 bool IsSorted(const Array& arr);
 int Max(const Array& arr);
+Array* Merge(const Array& arr1, const Array& arr2);
 int Min(const Array& arr);
 void Rearrange(Array* arr);
 void Reverse(Array* arr);

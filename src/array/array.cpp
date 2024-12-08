@@ -65,6 +65,32 @@ int Max(const Array& arr) {
     return max;
 }
 
+Array* Merge(const Array& arr1, const Array& arr2) {
+    int i, j, k;
+    i = j = k = 0;
+
+    Array *arr = new Array;
+    arr->length = arr1.length + arr2.length;
+    arr->size = 10;
+    arr->data = new int[arr->size];
+
+    while(i < arr1.length && j < arr2.length) {
+        if (arr1.data[i] < arr2.data[j]) {
+            arr->data[k++] = arr1.data[i++];
+        } else {
+            arr->data[k++] = arr2.data[j++];
+        }
+    }
+    for (; i < arr1.length; i++) {
+        arr->data[k++] = arr1.data[i];
+    }
+    for (; j < arr2.length; j++) {
+        arr->data[k++] = arr2.data[j];
+    }
+
+    return arr;
+}
+
 int Min(const Array& arr) {
     int min = arr.data[0];
     for (int i = 1; i < arr.length; i++) {

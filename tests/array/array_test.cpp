@@ -142,6 +142,64 @@ TEST(ArrayMaxTest, CanFindMaxInArray) {
     EXPECT_EQ(Max(arr), 3);
 }
 
+TEST(ArrayMergeTest, CanMergeTwoArraysOfEqualLength) {
+    Array arr1;
+    arr1.data = new int[10];
+    arr1.size = 10;
+
+    arr1.data[0] = 1;
+    arr1.data[1] = 3;
+    arr1.data[2] = 5;
+    arr1.length = 3;
+
+    Array arr2;
+    arr2.data = new int[10];
+    arr2.size = 10;
+
+    arr2.data[0] = 2;
+    arr2.data[1] = 4;
+    arr2.data[2] = 6;
+    arr2.length = 3;
+
+    Array *arr = Merge(arr1, arr2);
+
+    EXPECT_EQ(arr->data[0], 1);
+    EXPECT_EQ(arr->data[1], 2);
+    EXPECT_EQ(arr->data[2], 3);
+    EXPECT_EQ(arr->data[3], 4);
+    EXPECT_EQ(arr->data[4], 5);
+    EXPECT_EQ(arr->data[5], 6);
+    EXPECT_EQ(arr->length, 6);
+}
+
+TEST(ArrayMergeTest, CanMergeTwoArraysOfDifferentLength) {
+    Array arr1;
+    arr1.data = new int[10];
+    arr1.size = 10;
+
+    arr1.data[0] = 1;
+    arr1.data[1] = 3;
+    arr1.data[2] = 5;
+    arr1.length = 3;
+
+    Array arr2;
+    arr2.data = new int[10];
+    arr2.size = 10;
+
+    arr2.data[0] = 2;
+    arr2.data[1] = 4;
+    arr2.length = 2;
+
+    Array *arr = Merge(arr1, arr2);
+
+    EXPECT_EQ(arr->data[0], 1);
+    EXPECT_EQ(arr->data[1], 2);
+    EXPECT_EQ(arr->data[2], 3);
+    EXPECT_EQ(arr->data[3], 4);
+    EXPECT_EQ(arr->data[4], 5);
+    EXPECT_EQ(arr->length, 5);
+}
+
 TEST(ArrayMinTest, CanFindMinInArray) {
     Array arr;
     arr.data = new int[10];
