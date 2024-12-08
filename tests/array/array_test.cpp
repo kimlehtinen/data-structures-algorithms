@@ -1,287 +1,279 @@
 #include <gtest/gtest.h>
 #include "array/array.h"
 
+
 TEST(ArrayAppendTest, CanAppendToArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    Append(&arr, 1);
-    Append(&arr, 2);
-    Append(&arr, 3);
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_EQ(arr.data[0], 1);
-    EXPECT_EQ(arr.data[1], 2);
-    EXPECT_EQ(arr.data[2], 3);
-    EXPECT_EQ(arr.length, 3);
+    EXPECT_EQ(arr.Get(0), 1);
+    EXPECT_EQ(arr.Get(1), 2);
+    EXPECT_EQ(arr.Get(2), 3);
+    EXPECT_EQ(arr.Get(3), -1); // Ensure no out-of-bounds access
 }
 
 TEST(ArrayAverageTest, CanCalculateAverage) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_FLOAT_EQ(Average(arr), 2.0);
+    EXPECT_FLOAT_EQ(arr.Average(), 2.0);
 }
 
 TEST(ArrayDeleteTest, CanDeleteFromArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    Delete(&arr, 1);
+    arr.Delete(1);
 
-    EXPECT_EQ(arr.data[0], 1);
-    EXPECT_EQ(arr.data[1], 3);
-    EXPECT_EQ(arr.length, 2);
+    EXPECT_EQ(arr.Get(0), 1);
+    EXPECT_EQ(arr.Get(1), 3);
+    EXPECT_EQ(arr.Get(2), -1); // Ensure no out-of-bounds access
+}
+
+TEST(ArrayDifferenceSortedTest, CanFindDifferenceOfTwoSortedArrays) {
+    Array arr1(10);
+    arr1.Append(1);
+    arr1.Append(3);
+    arr1.Append(5);
+
+    Array arr2(10);
+    arr2.Append(2);
+    arr2.Append(3);
+    arr2.Append(6);
+
+    Array *arr = arr1.DifferenceSorted(arr2);
+
+    EXPECT_EQ(arr->Get(0), 1);
+    EXPECT_EQ(arr->Get(1), 5);
+    EXPECT_EQ(arr->Get(2), -1); // Ensure no out-of-bounds access
+
+    delete arr;
 }
 
 TEST(ArrayDisplayTest, CanDisplayArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
     testing::internal::CaptureStdout();
-    Display(arr);
+    arr.Display();
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "1 2 3 \n");
 }
 
 TEST(ArrayGetTest, CanGetElementFromArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_EQ(Get(arr, 1), 2);
+    EXPECT_EQ(arr.Get(1), 2);
 }
 
 TEST(ArrayInsertTest, CanInsertIntoArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    Insert(&arr, 1, 5);
+    arr.Insert(1, 5);
 
-    EXPECT_EQ(arr.data[0], 1);
-    EXPECT_EQ(arr.data[1], 5);
-    EXPECT_EQ(arr.data[2], 2);
-    EXPECT_EQ(arr.data[3], 3);
-    EXPECT_EQ(arr.length, 4);
+    EXPECT_EQ(arr.Get(0), 1);
+    EXPECT_EQ(arr.Get(1), 5);
+    EXPECT_EQ(arr.Get(2), 2);
+    EXPECT_EQ(arr.Get(3), 3);
+}
+
+TEST(ArrayIntersectionSortedTest, CanFindIntersectionOfTwoSortedArrays) {
+    Array arr1(10);
+    arr1.Append(1);
+    arr1.Append(3);
+    arr1.Append(5);
+
+    Array arr2(10);
+    arr2.Append(2);
+    arr2.Append(3);
+    arr2.Append(6);
+
+    Array *arr = arr1.IntersectionSorted(arr2);
+
+    EXPECT_EQ(arr->Get(0), 3);
+    EXPECT_EQ(arr->Get(1), -1); // Ensure no out-of-bounds access
+
+    delete arr;
 }
 
 TEST(ArrayIsSortedTest, CanCheckSortedArrayIsSorted) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_TRUE(IsSorted(arr));
+    EXPECT_TRUE(arr.IsSorted());
 }
 
 TEST(ArrayIsSortedTest, CanCheckUnsortedArrayIsNotSorted) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 3;
-    arr.data[1] = 2;
-    arr.data[2] = 1;
-    arr.length = 3;
+    arr.Append(3);
+    arr.Append(2);
+    arr.Append(1);
 
-    EXPECT_FALSE(IsSorted(arr));
+    EXPECT_FALSE(arr.IsSorted());
 }
 
 TEST(ArrayMaxTest, CanFindMaxInArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_EQ(Max(arr), 3);
+    EXPECT_EQ(arr.Max(), 3);
 }
 
 TEST(ArrayMergeTest, CanMergeTwoArraysOfEqualLength) {
-    Array arr1;
-    arr1.data = new int[10];
-    arr1.size = 10;
+    Array arr1(10);
+    arr1.Append(1);
+    arr1.Append(3);
+    arr1.Append(5);
 
-    arr1.data[0] = 1;
-    arr1.data[1] = 3;
-    arr1.data[2] = 5;
-    arr1.length = 3;
+    Array arr2(10);
+    arr2.Append(2);
+    arr2.Append(4);
+    arr2.Append(6);
 
-    Array arr2;
-    arr2.data = new int[10];
-    arr2.size = 10;
+    Array *arr = arr1.Merge(arr2);
 
-    arr2.data[0] = 2;
-    arr2.data[1] = 4;
-    arr2.data[2] = 6;
-    arr2.length = 3;
+    EXPECT_EQ(arr->Get(0), 1);
+    EXPECT_EQ(arr->Get(1), 2);
+    EXPECT_EQ(arr->Get(2), 3);
+    EXPECT_EQ(arr->Get(3), 4);
+    EXPECT_EQ(arr->Get(4), 5);
+    EXPECT_EQ(arr->Get(5), 6);
 
-    Array *arr = Merge(arr1, arr2);
-
-    EXPECT_EQ(arr->data[0], 1);
-    EXPECT_EQ(arr->data[1], 2);
-    EXPECT_EQ(arr->data[2], 3);
-    EXPECT_EQ(arr->data[3], 4);
-    EXPECT_EQ(arr->data[4], 5);
-    EXPECT_EQ(arr->data[5], 6);
-    EXPECT_EQ(arr->length, 6);
+    delete arr;
 }
 
 TEST(ArrayMergeTest, CanMergeTwoArraysOfDifferentLength) {
-    Array arr1;
-    arr1.data = new int[10];
-    arr1.size = 10;
+    Array arr1(10);
+    arr1.Append(1);
+    arr1.Append(3);
+    arr1.Append(5);
 
-    arr1.data[0] = 1;
-    arr1.data[1] = 3;
-    arr1.data[2] = 5;
-    arr1.length = 3;
+    Array arr2(10);
+    arr2.Append(2);
+    arr2.Append(4);
 
-    Array arr2;
-    arr2.data = new int[10];
-    arr2.size = 10;
+    Array *arr = arr1.Merge(arr2);
 
-    arr2.data[0] = 2;
-    arr2.data[1] = 4;
-    arr2.length = 2;
+    EXPECT_EQ(arr->Get(0), 1);
+    EXPECT_EQ(arr->Get(1), 2);
+    EXPECT_EQ(arr->Get(2), 3);
+    EXPECT_EQ(arr->Get(3), 4);
+    EXPECT_EQ(arr->Get(4), 5);
 
-    Array *arr = Merge(arr1, arr2);
-
-    EXPECT_EQ(arr->data[0], 1);
-    EXPECT_EQ(arr->data[1], 2);
-    EXPECT_EQ(arr->data[2], 3);
-    EXPECT_EQ(arr->data[3], 4);
-    EXPECT_EQ(arr->data[4], 5);
-    EXPECT_EQ(arr->length, 5);
+    delete arr;
 }
 
 TEST(ArrayMinTest, CanFindMinInArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_EQ(Min(arr), 1);
+    EXPECT_EQ(arr.Min(), 1);
 }
 
 TEST(ArrayRearrangeTest, CanRearrangeArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 2;
-    arr.data[1] = -3;
-    arr.data[2] = 25;
-    arr.data[3] = 10;
-    arr.data[4] = -15;
-    arr.data[5] = -7;
-    arr.length = 6;
+    arr.Append(2);
+    arr.Append(-3);
+    arr.Append(25);
+    arr.Append(10);
+    arr.Append(-15);
+    arr.Append(-7);
 
-    Rearrange(&arr);
+    arr.Rearrange();
 
-    EXPECT_EQ(arr.data[0], -7);
-    EXPECT_EQ(arr.data[1], -3);
-    EXPECT_EQ(arr.data[2], -15);
-    EXPECT_EQ(arr.data[3], 10);
-    EXPECT_EQ(arr.data[4], 25);
-    EXPECT_EQ(arr.data[5], 2);
+    EXPECT_EQ(arr.Get(0), -7);
+    EXPECT_EQ(arr.Get(1), -3);
+    EXPECT_EQ(arr.Get(2), -15);
+    EXPECT_EQ(arr.Get(3), 10);
+    EXPECT_EQ(arr.Get(4), 25);
+    EXPECT_EQ(arr.Get(5), 2);
 }
 
 TEST(ArrayReverseTest, CanReverseArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    Reverse(&arr);
+    arr.Reverse();
 
-    EXPECT_EQ(arr.data[0], 3);
-    EXPECT_EQ(arr.data[1], 2);
-    EXPECT_EQ(arr.data[2], 1);
+    EXPECT_EQ(arr.Get(0), 3);
+    EXPECT_EQ(arr.Get(1), 2);
+    EXPECT_EQ(arr.Get(2), 1);
 }
 
 TEST(ArraySetTest, CanSetElementInArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    Set(&arr, 1, 5);
+    arr.Set(1, 5);
 
-    EXPECT_EQ(arr.data[1], 5);
+    EXPECT_EQ(arr.Get(1), 5);
 }
 
 TEST(ArraySumTest, CanCalculateSumOfArray) {
-    Array arr;
-    arr.data = new int[10];
-    arr.size = 10;
-    arr.length = 0;
+    Array arr(10);
 
-    arr.data[0] = 1;
-    arr.data[1] = 2;
-    arr.data[2] = 3;
-    arr.length = 3;
+    arr.Append(1);
+    arr.Append(2);
+    arr.Append(3);
 
-    EXPECT_EQ(Sum(arr), 6);
+    EXPECT_EQ(arr.Sum(), 6);
+}
+
+TEST(ArrayUnionSortedTest, CanUnionTwoSortedArrays) {
+    Array arr1(10);
+    arr1.Append(1);
+    arr1.Append(3);
+    arr1.Append(5);
+
+    Array arr2(10);
+    arr2.Append(2);
+    arr2.Append(3);
+    arr2.Append(6);
+
+    Array *arr = arr1.UnionSorted(arr2);
+
+    EXPECT_EQ(arr->Get(0), 1);
+    EXPECT_EQ(arr->Get(1), 2);
+    EXPECT_EQ(arr->Get(2), 3);
+    EXPECT_EQ(arr->Get(3), 5);
+    EXPECT_EQ(arr->Get(4), 6);
+
+    delete arr;
 }

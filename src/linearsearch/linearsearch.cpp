@@ -1,8 +1,8 @@
 #include <iostream>
-#include "array/array.h"
+#include "array/carray/carray.h"
 
 
-int LinearSearch(Array arr, int key) {
+int LinearSearch(CArray arr, int key) {
     for (int i = 0; i < arr.length; i++) {
         if (arr.data[i] == key) {
             return i;
@@ -11,7 +11,7 @@ int LinearSearch(Array arr, int key) {
     return -1;
 }
 
-int LinearSearchSwap(Array *arr, int key) {
+int LinearSearchSwap(CArray *arr, int key) {
     for (int i = 0; i < arr->length; i++) {
         if (arr->data[i] == key) {
             int temp = arr->data[i];
@@ -23,7 +23,7 @@ int LinearSearchSwap(Array *arr, int key) {
     return -1;
 }
 
-int LinearSearchHead(Array *arr, int key) {
+int LinearSearchHead(CArray *arr, int key) {
     for (int i = 0; i < arr->length; i++) {
         if (arr->data[i] == key) {
             int temp = arr->data[i];

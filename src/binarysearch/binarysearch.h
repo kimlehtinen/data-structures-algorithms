@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-#include "array/array.h"
+#include "array/carray/carray.h"
 
-int BinarySearch(const Array& arr, int key);
+int BinarySearch(const CArray& arr, int key);
 
-int BinarySearchRecursive(const Array& arr, int low, int high, int key);
+int BinarySearchRecursive(const CArray& arr, int low, int high, int key);
 
 #endif // BINARYSEARCH_H

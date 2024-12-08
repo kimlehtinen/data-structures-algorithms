@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 #include "binarysearch/binarysearch.h"
-#include "array/array.h"
+#include "array/carray/carray.h"
 
 TEST(BinarySearchTest, HandlesSmallCases) {
-    Array arr;
+    CArray arr;
     arr.data = new int[10];
     arr.size = 10;
     arr.length = 0;
@@ -20,7 +20,7 @@ TEST(BinarySearchTest, HandlesSmallCases) {
 }
 
 TEST(BinarySearchRecursiveTest, HandlesSmallCases) {
-    Array arr;
+    CArray arr;
     arr.data = new int[10];
     arr.size = 10;
     arr.length = 0;

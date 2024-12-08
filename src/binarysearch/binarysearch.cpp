@@ -1,9 +1,9 @@
-#include "array/array.h"
+#include "array/carray/carray.h"
 
 /**
  * Time complexity: Best case O(1), Average case O(log n), Worst case O(log n)
  */
-int BinarySearch(const Array& arr, int key) {
+int BinarySearch(const CArray& arr, int key) {
     int low, high, mid;
     low = 0;
     high = arr.length - 1;
@@ -21,7 +21,7 @@ int BinarySearch(const Array& arr, int key) {
     return -1;
 }
 
-int BinarySearchRecursive(const Array& arr, int low, int high, int key) {
+int BinarySearchRecursive(const CArray& arr, int low, int high, int key) {
     if (low <= high) {
         int mid = (low + high) / 2;
         if (key == arr.data[mid]) {

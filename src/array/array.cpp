@@ -2,87 +2,144 @@
 
 #include "array.h"
 
+Array::Array(int size) {
+    this->size = size;
+    this->length = 0;
+    this->data = new int[size];
+}
 
-void Append(Array *arr, int x) {
-    if (arr->length < arr->size) {
-        arr->data[arr->length++] = x;
+Array::~Array() {
+    delete[] data;
+}
+
+void Array::Append(int x) {
+    if (length < size) {
+        data[length++] = x;
     }
 }
 
-float Average(const Array& arr) {
-    return (float)Sum(arr) / arr.length;
+float Array::Average() {
+    return (float)Sum() / length;
 }
 
-void Delete(Array *arr, int index) {
-    if (index >= 0 && index < arr->length) {
-        for (int i = index; i < arr->length - 1; i++) {
-            arr->data[i] = arr->data[i + 1];
+void Array::Delete(int index) {
+    if (index >= 0 && index < length) {
+        for (int i = index; i < length - 1; i++) {
+            data[i] = data[i + 1];
         }
-        arr->length--;
+        length--;
     }
 }
 
-void Display(const Array& arr) {
-    for (int i = 0; i < arr.length; i++) {
-        std::cout << arr.data[i] << " ";
+Array* Array::DifferenceSorted(const Array& arr2) {
+    int i, j, k;
+    i = j = k = 0;
+
+    Array *arr = new Array(10);
+
+    while(i < length && j < arr2.length) {
+        if (data[i] < arr2.data[j]) {
+            arr->data[k++] = data[i++];
+        } else if (arr2.data[j] < data[i]) {
+            j++;
+        } else {
+            i++;
+            j++;
+        }
+    }
+    for (; i < length; i++) {
+        arr->data[k++] = data[i];
+    }
+
+    arr->length = k;
+
+    return arr;
+}
+
+void Array::Display() {
+    for (int i = 0; i < length; i++) {
+        std::cout << data[i] << " ";
     }
     std::cout << std::endl;
 }
 
-int Get(const Array& arr, int index) {
-    if (index >= 0 && index < arr.length) {
-        return arr.data[index];
+int Array::Get(int index) {
+    if (index >= 0 && index < length) {
+        return data[index];
     }
     return -1;
 }
 
-void Insert(Array *arr, int index, int x) {
-    if (index >= 0 && index <= arr->length) {
-        for (int i = arr->length; i > index; i--) {
-            arr->data[i] = arr->data[i - 1];
+void Array::Insert(int index, int x) {
+    if (index >= 0 && index <= length) {
+        for (int i = length; i > index; i--) {
+            data[i] = data[i - 1];
         }
-        arr->data[index] = x;
-        arr->length++;
+        data[index] = x;
+        length++;
     }
 }
 
-bool IsSorted(const Array& arr) {
-    for (int i = 0; i < arr.length - 1; i++) {
-        if (arr.data[i] > arr.data[i + 1]) {
+Array* Array::IntersectionSorted(const Array& arr2) {
+    int i, j, k;
+    i = j = k = 0;
+
+    Array *arr = new Array(10);
+
+    while(i < length && j < arr2.length) {
+        if (data[i] < arr2.data[j]) {
+           i++;
+        } else if (arr2.data[j] < data[i]) {
+            j++;
+        } else { // data[i] == arr2.data[j]
+            arr->data[k++] = data[i++];
+            j++;
+        }
+    }
+
+    arr->length = k;
+
+    return arr;
+}
+
+bool Array::IsSorted() {
+    for (int i = 0; i < length - 1; i++) {
+        if (data[i] > data[i + 1]) {
             return false;
         }
     }
     return true;
 }
 
-int Max(const Array& arr) {
-    int max = arr.data[0];
-    for (int i = 1; i < arr.length; i++) {
-        if (arr.data[i] > max) {
-            max = arr.data[i];
+int Array::Max() {
+    int max = data[0];
+    for (int i = 1; i < length; i++) {
+        if (data[i] > max) {
+            max = data[i];
         }
     }
     return max;
 }
 
-Array* Merge(const Array& arr1, const Array& arr2) {
+/**
+ * Time Complexity: O(m + n) = O(2n) = O(n)
+ */
+Array* Array::Merge(const Array& arr2) {
     int i, j, k;
     i = j = k = 0;
 
-    Array *arr = new Array;
-    arr->length = arr1.length + arr2.length;
-    arr->size = 10;
-    arr->data = new int[arr->size];
+    Array *arr = new Array(length + arr2.length);
+    arr->length = length + arr2.length;
 
-    while(i < arr1.length && j < arr2.length) {
-        if (arr1.data[i] < arr2.data[j]) {
-            arr->data[k++] = arr1.data[i++];
+    while(i < length && j < arr2.length) {
+        if (data[i] < arr2.data[j]) {
+            arr->data[k++] = data[i++];
         } else {
             arr->data[k++] = arr2.data[j++];
         }
     }
-    for (; i < arr1.length; i++) {
-        arr->data[k++] = arr1.data[i];
+    for (; i < length; i++) {
+        arr->data[k++] = data[i];
     }
     for (; j < arr2.length; j++) {
         arr->data[k++] = arr2.data[j];
@@ -91,48 +148,79 @@ Array* Merge(const Array& arr1, const Array& arr2) {
     return arr;
 }
 
-int Min(const Array& arr) {
-    int min = arr.data[0];
-    for (int i = 1; i < arr.length; i++) {
-        if (arr.data[i] < min) {
-            min = arr.data[i];
+int Array::Min() {
+    int min = data[0];
+    for (int i = 1; i < length; i++) {
+        if (data[i] < min) {
+            min = data[i];
         }
     }
     return min;
 }
 
-void Rearrange(Array *arr) {
+void Array::Rearrange() {
     int i = 0;
-    int j = arr->length - 1;
+    int j = length - 1;
     while (i < j) {
-        while (arr->data[i] < 0) i++;
-        while (arr->data[j] >= 0) j--;
+        while (data[i] < 0) i++;
+        while (data[j] >= 0) j--;
         if (i < j) {
-            int temp = arr->data[i];
-            arr->data[i] = arr->data[j];
-            arr->data[j] = temp;
+            int temp = data[i];
+            data[i] = data[j];
+            data[j] = temp;
         }
     }
 }
 
-void Reverse(Array *arr) {  
-    for (int i = 0, j = arr->length - 1; i < j; i++, j--) {
-        int temp = arr->data[i];
-        arr->data[i] = arr->data[j];
-        arr->data[j] = temp;
+void Array::Reverse() {  
+    for (int i = 0, j = length - 1; i < j; i++, j--) {
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
     }
 }
 
-void Set(Array *arr, int index, int x) {
-    if (index >= 0 && index < arr->length) {
-        arr->data[index] = x;
+void Array::Set(int index, int x) {
+    if (index >= 0 && index < length) {
+        data[index] = x;
     }
 }
 
-int Sum(const Array& arr) {
+int Array::Sum() {
     int sum = 0;
-    for (int i = 0; i < arr.length; i++) {
-        sum += arr.data[i];
+    for (int i = 0; i < length; i++) {
+        sum += data[i];
     }
     return sum;
+}
+
+/**
+ * Time Complexity: O(m + n) = O(2n) = O(n)
+ */
+Array* Array::UnionSorted(const Array& arr2) {
+    int i, j, k;
+    i = j = k = 0;
+
+    Array *arr = new Array(10);
+
+    while(i < length && j < arr2.length) {
+        if (data[i] < arr2.data[j]) {
+            arr->data[k++] = data[i++];
+        } else if (arr2.data[j] < data[i]) {
+            arr->data[k++] = arr2.data[j++];
+        } else {
+            arr->data[k++] = data[i++];
+            j++;
+        }
+    }
+    for (; i < length; i++) {
+        arr->data[k++] = data[i];
+    }
+    for (; j < arr2.length; j++) {
+        arr->data[k++] = arr2.data[j];
+    }
+
+    arr->length = k;
+
+    return arr;
 }
