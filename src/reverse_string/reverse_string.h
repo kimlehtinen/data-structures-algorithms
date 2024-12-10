@@ -4,5 +4,6 @@
 #include <string>
 
 std::string reverseString(const std::string& str);
+void reverseStringCharArray(char* str);
 
 #endif
