@@ -38,6 +38,19 @@ void LinkedList::Display() {
     std::cout << std::endl;
 }
 
+int LinkedList::GetMax()
+{
+    int max = INT32_MIN;
+    Node* temp = head_;
+    while (temp != nullptr) {
+        if (temp->data > max) {
+            max = temp->data;
+        }
+        temp = temp->next;
+    }
+    return max;
+}
+
 int LinkedList::GetSize() {
     int size = 0;
     Node* temp = head_;

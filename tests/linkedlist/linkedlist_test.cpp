@@ -40,6 +40,73 @@ TEST (LinkedListTest, CanGetSizeWhenHasElements) {
     EXPECT_EQ(list.GetSize(), 3);
 }
 
+TEST (LinkedListTest, CanGetINT32MINWhenEmptyList) {
+    LinkedList list;
+
+    EXPECT_EQ(list.GetMax(), INT32_MIN);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenHasElementsOrdered) {
+    LinkedList list;
+
+    list.Add(1);
+    list.Add(2);
+    list.Add(3);
+
+    EXPECT_EQ(list.GetMax(), 3);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenHasElementsUnordered) {
+    LinkedList list;
+
+    list.Add(3);
+    list.Add(1);
+    list.Add(2);
+
+    EXPECT_EQ(list.GetMax(), 3);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenHasElementsNegative) {
+    LinkedList list;
+
+    list.Add(-3);
+    list.Add(-1);
+    list.Add(-2);
+
+    EXPECT_EQ(list.GetMax(), -1);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenHasElementsNegativeAndPositive) {
+    LinkedList list;
+
+    list.Add(-3);
+    list.Add(1);
+    list.Add(-2);
+
+    EXPECT_EQ(list.GetMax(), 1);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenHasElementsNegativeAndPositiveAndZero) {
+    LinkedList list;
+
+    list.Add(-3);
+    list.Add(0);
+    list.Add(1);
+    list.Add(-2);
+
+    EXPECT_EQ(list.GetMax(), 1);
+}
+
+TEST (LinkedListTest, CanGetMaxWhenAllSame) {
+    LinkedList list;
+
+    list.Add(1);
+    list.Add(1);
+    list.Add(1);
+
+    EXPECT_EQ(list.GetMax(), 1);
+}
+
 TEST (LinkedListTest, CanGetSumEmptyList) {
     LinkedList list;
 

@@ -16,6 +16,7 @@ class LinkedList {
         ~LinkedList();
         void Add(int data);
         void Display();
+        int GetMax();
         int GetSize();
         int GetSum();
 };
