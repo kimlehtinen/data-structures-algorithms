@@ -29,4 +29,19 @@ class LinkedList {
         Node* Search(int data);
 };
 
+class CircularLinkedList {
+    private:
+        Node* head_;
+        Node* tail_;
+        int size_;
+    public:
+        CircularLinkedList();
+        ~CircularLinkedList();
+        void Display();
+        void DeleteAt(int index);
+        Node* FindAt(int index);
+        int GetSize();
+        void Insert(int index, int data);
+};
+
 #endif // LINKEDLIST_H
