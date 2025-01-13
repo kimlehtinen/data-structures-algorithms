@@ -44,4 +44,26 @@ class CircularLinkedList {
         void Insert(int index, int data);
 };
 
+struct DoublyNode {
+    int data;
+    DoublyNode* next;
+    DoublyNode* prev;
+};
+
+class DoublyLinkedList {
+    private:
+        DoublyNode* head_;
+        DoublyNode* tail_;
+        int size_;
+    public:
+        DoublyLinkedList();
+        ~DoublyLinkedList();
+        void Display();
+        void DeleteAt(int index);
+        DoublyNode* FindAt(int index);
+        int GetSize();
+        void Insert(int index, int data);
+        void Reverse();
+};
+
 #endif // LINKEDLIST_H
