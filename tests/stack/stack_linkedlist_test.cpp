@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include "stack/stack.h"
 
-TEST(StackArrayTest, CanDisplay) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, CanDisplay) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -17,8 +17,8 @@ TEST(StackArrayTest, CanDisplay) {
     EXPECT_EQ(output, "50 40 30 20 10 \n");
 }
 
-TEST(StackArrayTest, CanPush) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, CanPush) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -30,8 +30,8 @@ TEST(StackArrayTest, CanPush) {
     EXPECT_EQ(stack.IsFull(), true);
 }
 
-TEST(StackArrayTest, CanPop) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, CanPop) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -47,8 +47,8 @@ TEST(StackArrayTest, CanPop) {
     EXPECT_EQ(stack.IsEmpty(), true);
 }
 
-TEST(StackArrayTest, CanPeek) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, CanPeek) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -60,14 +60,14 @@ TEST(StackArrayTest, CanPeek) {
     EXPECT_EQ(stack.Peek(), 50);
 }
 
-TEST(StackArrayTest, IsEmptyWhenNotPushedAnything) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, IsEmptyWhenNotPushedAnything) {
+    StackLinkedList stack(5);
 
     EXPECT_EQ(stack.IsEmpty(), true);
 }
 
-TEST(StackArrayTest, IsEmptyWhenAllElementsArePopped) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, IsEmptyWhenAllElementsArePopped) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -83,16 +83,16 @@ TEST(StackArrayTest, IsEmptyWhenAllElementsArePopped) {
     EXPECT_EQ(stack.IsEmpty(), true);
 }
 
-TEST(StackArrayTest, IsNotEmptyWhenPushedSomething) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, IsNotEmptyWhenPushedSomething) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
 
     EXPECT_EQ(stack.IsEmpty(), false);
 }
 
-TEST(StackArrayTest, IsFullWhenMaxCapacityReached) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, IsFullWhenMaxCapacityReached) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -103,8 +103,8 @@ TEST(StackArrayTest, IsFullWhenMaxCapacityReached) {
     EXPECT_EQ(stack.IsFull(), true);
 }
 
-TEST(StackArrayTest, IsNotFullWhenNotReachedMaxCapacity) {
-    StackArray stack(5);
+TEST(StackLinkedListTest, IsNotFullWhenNotReachedMaxCapacity) {
+    StackLinkedList stack(5);
 
     stack.Push(10);
     stack.Push(20);

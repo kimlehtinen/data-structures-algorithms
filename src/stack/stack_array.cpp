@@ -1,9 +1,17 @@
 #include "stack/stack.h"
+#include <iostream>
 
 StackArray::StackArray(int capacity) {
     stack_ = new int[capacity];
     top_ = -1;
     capacity_ = capacity;
+}
+
+void StackArray::Display() {
+    for (int i = top_; i >= 0; i--) {
+        std::cout << stack_[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 void StackArray::Push(int value) {

@@ -3,6 +3,7 @@
 
 class Stack {
 public:
+    virtual void Display() = 0;
     virtual void Push(int value) = 0; 
     virtual int Pop() = 0;           
     virtual int Peek() const = 0;    
@@ -19,6 +20,7 @@ private:
     int capacity_;
 public:
     StackArray(int capacity);
+    void Display();
     void Push(int value) override;
     int Pop() override;
     int Peek() const override;
@@ -33,9 +35,12 @@ private:
         int data;
         Node* next;
     };
-    Node* head_;
+    Node* top_;
+    int max_size_;
+    int current_size_;
 public:
-    StackLinkedList();
+    StackLinkedList(int max_size);
+    void Display();
     void Push(int value) override;
     int Pop() override;
     int Peek() const override;
