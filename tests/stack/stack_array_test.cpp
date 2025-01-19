@@ -2,7 +2,7 @@
 #include "stack/stack.h"
 
 TEST(StackArrayTest, CanDisplay) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -18,7 +18,7 @@ TEST(StackArrayTest, CanDisplay) {
 }
 
 TEST(StackArrayTest, CanPush) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -31,7 +31,7 @@ TEST(StackArrayTest, CanPush) {
 }
 
 TEST(StackArrayTest, CanPop) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -48,7 +48,7 @@ TEST(StackArrayTest, CanPop) {
 }
 
 TEST(StackArrayTest, CanPeek) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -61,13 +61,13 @@ TEST(StackArrayTest, CanPeek) {
 }
 
 TEST(StackArrayTest, IsEmptyWhenNotPushedAnything) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     EXPECT_EQ(stack.IsEmpty(), true);
 }
 
 TEST(StackArrayTest, IsEmptyWhenAllElementsArePopped) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -84,7 +84,7 @@ TEST(StackArrayTest, IsEmptyWhenAllElementsArePopped) {
 }
 
 TEST(StackArrayTest, IsNotEmptyWhenPushedSomething) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
 
@@ -92,7 +92,7 @@ TEST(StackArrayTest, IsNotEmptyWhenPushedSomething) {
 }
 
 TEST(StackArrayTest, IsFullWhenMaxCapacityReached) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -104,7 +104,7 @@ TEST(StackArrayTest, IsFullWhenMaxCapacityReached) {
 }
 
 TEST(StackArrayTest, IsNotFullWhenNotReachedMaxCapacity) {
-    StackArray stack(5);
+    StackArray<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);

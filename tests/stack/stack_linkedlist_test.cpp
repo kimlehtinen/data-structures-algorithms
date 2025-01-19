@@ -2,7 +2,7 @@
 #include "stack/stack.h"
 
 TEST(StackLinkedListTest, CanDisplay) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -18,7 +18,7 @@ TEST(StackLinkedListTest, CanDisplay) {
 }
 
 TEST(StackLinkedListTest, CanPush) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -31,7 +31,7 @@ TEST(StackLinkedListTest, CanPush) {
 }
 
 TEST(StackLinkedListTest, CanPop) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -48,7 +48,7 @@ TEST(StackLinkedListTest, CanPop) {
 }
 
 TEST(StackLinkedListTest, CanPeek) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -61,13 +61,13 @@ TEST(StackLinkedListTest, CanPeek) {
 }
 
 TEST(StackLinkedListTest, IsEmptyWhenNotPushedAnything) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     EXPECT_EQ(stack.IsEmpty(), true);
 }
 
 TEST(StackLinkedListTest, IsEmptyWhenAllElementsArePopped) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -84,7 +84,7 @@ TEST(StackLinkedListTest, IsEmptyWhenAllElementsArePopped) {
 }
 
 TEST(StackLinkedListTest, IsNotEmptyWhenPushedSomething) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
 
@@ -92,7 +92,7 @@ TEST(StackLinkedListTest, IsNotEmptyWhenPushedSomething) {
 }
 
 TEST(StackLinkedListTest, IsFullWhenMaxCapacityReached) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
@@ -104,7 +104,7 @@ TEST(StackLinkedListTest, IsFullWhenMaxCapacityReached) {
 }
 
 TEST(StackLinkedListTest, IsNotFullWhenNotReachedMaxCapacity) {
-    StackLinkedList stack(5);
+    StackLinkedList<int> stack(5);
 
     stack.Push(10);
     stack.Push(20);
