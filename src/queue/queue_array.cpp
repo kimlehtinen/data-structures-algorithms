@@ -5,7 +5,11 @@
  * Drawbacks:
  * - Can't reuse deleted indexes in the array from which elements are deleted.
  * - Every location can be used only once.
- * - Queue is full when all elements are dequeued, front_ and rear_ are at the end of the array. 
+ * - Queue is full when all elements are dequeued, front_ and rear_ are at the end of the array.
+ * 
+ * Better approach:
+ * - Reset pointers
+ * - Circular queue
  */
 
 QueueArray::QueueArray(int size) {

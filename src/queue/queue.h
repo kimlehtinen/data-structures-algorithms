@@ -17,4 +17,20 @@ public:
     void Display();
 };
 
+class QueueCircular {
+private:
+    int* queue_;
+    int front_;
+    int rear_;
+    int size_;
+public:
+    QueueCircular(int size);
+    ~QueueCircular();
+    void Enqueue(int value);
+    int Dequeue();
+    int Peek();
+    bool IsEmpty();
+    void Display();
+};
+
 #endif // QUEUE_H
