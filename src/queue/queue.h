@@ -33,4 +33,22 @@ public:
     void Display();
 };
 
+class QueueLinkedList {
+private:
+    struct Node {
+        int data;
+        Node* next;
+    };
+    Node* front_;
+    Node* rear_;
+public:
+    QueueLinkedList();
+    ~QueueLinkedList();
+    void Enqueue(int value);
+    int Dequeue();
+    int Peek();
+    bool IsEmpty();
+    void Display();
+};
+
 #endif // QUEUE_H
